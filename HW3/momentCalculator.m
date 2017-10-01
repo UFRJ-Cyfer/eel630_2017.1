@@ -1,0 +1,26 @@
+function [ mu ] = momentCalculator( orderX, orderY, distribution , useMean)
+%MOMENTCALCULATOR Summary of this function goes here
+%   Detailed explanation goes here
+
+totalSum = sum(sum(distribution,1),2);
+auxMatrix = zeros(size(distribution));
+
+for k = 1:size(auxMatrix,1)
+    for j = 1:size(auxMatrix,2)
+        auxMatrix(k,j) = ((k-1)^orderX) * ((j-1)^orderY);
+    end
+end
+
+if useMean
+    meanX = momentCalculator(1,0,distribution,0);
+    meanY = momentCalculator(0,1,distribution,0);
+    for k = 1:size(auxMatrix,1)
+        for j = 1:size(auxMatrix,2)
+            auxMatrix(k,j) = ((k-1-meanX)^orderX) * ((j-1-meanY)^orderY);
+        end
+    end
+end
+
+mu = sum(sum(auxMatrix.*distribution,1),2)/totalSum;
+end
+
