@@ -1,0 +1,51 @@
+
+% canadian citizen conditional CDF
+% f(y|x) = 1-exp( exp((x-m)/l) * (1-exp(y/l) ) ) y >= 0
+
+% if f(Y|X) = 0.5 -> 1/2 chance of living more than Y years if you are X
+% years (in this specific case y = median)
+
+%constants FEMALE
+% m = 87.8;
+% l = 9.5;
+
+%constants MALE
+m = 81.95;
+l = 10.6;
+
+% life expectancy
+
+age = 1:100;
+yearsToLiveMedian = l*log(1- exp((m-age)/l)*log(0.5));
+
+figure;
+plot(yearsToLiveMedian)
+
+%if we retire at 65, that gives x = 65 = age
+% now we have P[Y > totalRetirementValue / s | age = 65]; 
+% note that the totalRetirementValue does not affect the distribution,
+% since it only fluctuates with age and life expectancy.
+
+y = 0:40;
+PL = exp(exp((65-m)/l) * (1-exp(y/l))); 
+
+figure;
+plot(PL)
+grid on;
+
+%case (i) - 1000 BRL/month
+%this gives us 12000 BRL/year (I BELIEVE THIS IS ABOUT SPENDING)
+
+figure;
+plot(PL)
+grid on;
+
+probs = 0.1:0.1:1;
+totalToSpend = zeros(size(probs));
+
+for k=1:length(probs)
+    [~, index] = min(abs(PL-probs(k)));
+    totalToSpend(k) = ;
+end
+
+
