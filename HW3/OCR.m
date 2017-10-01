@@ -1,6 +1,3 @@
-
-[ mu ] = momentCalculator( orderX, orderY, distribution , useMean)
-
 % https://www.kaggle.com/c/digit-recognizer/data
 dataset = csvread('train.csv',1,0);
 labels = dataset(:,1);
@@ -26,9 +23,9 @@ for digits = 0:9
     digits
 end
 
-figure
-plot(moments(5).firstOrder,moments(5).secondOrder,'.','Marker','+'); hold on;
-plot(moments(8).firstOrder,moments(8).secondOrder,'.','Marker','o')
+% for k=0:9
+%     status = mkdir(['images/' num2str(k)])
+% end
 
 digits = 1:10;
 for k=1:10
@@ -45,11 +42,3 @@ for k=1:10
 end
 
 
-for k=1:10
-    plot(moments(k).firstOrder,moments(k).secondOrder,'.','Marker','o')
-    pause
-end
-
-for k=0:9
-    status = mkdir(['images/' num2str(k)])
-end
